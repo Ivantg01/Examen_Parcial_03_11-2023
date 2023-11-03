@@ -1,6 +1,6 @@
 import { Request, Response } from "npm:express@4.18.2";
 import AgendaModel from "./models.ts";
-import {AgendaPeq} from "./models.ts";
+
 
 import { City } from "./types.ts";
 
@@ -53,7 +53,7 @@ export const addContacto = async (req: Request, res: Response) => {
         return;
     }
     try{
-        const  contactoFound= await AgendaModel.findOne({name: req.body.DNI}).exec(); // buscamos si existe un contacto con el mismo nombre
+        const  contactoFound= await AgendaModel.findOne({name: req.body.DNI}).exec(); 
         if(contactoFound){
             res.status(400).send("Error: contacto with same DNI already exists");
             return;
@@ -69,7 +69,7 @@ export const addContacto = async (req: Request, res: Response) => {
 export const updateContacto = async (req: Request, res: Response) => {
     try{
 
-        const contacto= await AgendaModel.findOneAndUpdate(req.params.id, req.body).exec();//buscamos disco por id y lo actualizamos
+        const contacto= await AgendaModel.findOneAndUpdate(req.params.id, req.body).exec();
         if(!req.body.DNI){
             res.send(contacto);
             return;
